@@ -2,6 +2,15 @@ var express = require('express');
 var app = express();
 
 // http://localhost:3000/hello.txt?q=xxxxxx
+app.get('/', function(req, res) {
+	res.send('Kaixo');
+});
+
+app.get('/add', function(req, res){
+	var usuario = req.query.usuario;
+	res.send('Kaixo: ' + usuario);
+});
+
 app.get('/hello.txt', function(req, res) {
 
 	var q = req.query.q;
