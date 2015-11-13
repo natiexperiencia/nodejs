@@ -14,11 +14,22 @@ connection.connect(function(error){
    }
 });
 
-var query = connection.query('SELECT nombre FROM una', function(error,rows, result){
+var query = connection.query('INSERT INTO una VALUES "otromas" ', function(error){
       if(error){
          throw error;
       }else{
-         console.log('El nombre es: ',rows[0].nombre);
+      	cosole.log('Insertado correctamente');
+      }
+   }
+);
+
+var query = connection.query('SELECT indice,nombre FROM una', function(error,rows, result){
+      if(error){
+         throw error;
+      }else{
+      	for (var i = 0; i < rows.length; i++) {
+      		console.log('Id: ',rows[i].indice+' Nombre: ',rows[i].nombre);
+      	}
       }
    }
 );
