@@ -6,13 +6,27 @@ var app = express();
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+var bodyParser = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+
 app.get('/', function (req, res) {
 	res.render('home');
 });
 
 app.get('/form', function (req, res) {
-	res.render('formulario');
-})
+	res.render('formulario', {layout:'main'});
+});
+
+app.post('/addUser', function (req, res) {
+	var usuario = {
+		nombre: req.body.nombre,//imprescindible body-parser
+		apellido: req.body.apellido
+	};
+	res.json(usuario);
+});
 
 app.get('/with-layout', function (req, res) {
 	res.render('home', {layout:'main'});
